@@ -32,15 +32,43 @@ A macro executa as seguintes etapas:
 
 ---
 
+## ⚙️ Macro `RegistrarDevolucao.vb`
+
+Macro vinculada a um botão na aba **Devolução**, responsável por registrar os dados de devolução na linha correspondente ao processo na aba **Registros**.
+
+### 🔎 Funcionalidades
+
+A macro executa as seguintes etapas:
+
+1. **Validação de dados**  
+   Verifica se todos os campos obrigatórios da aba *Devolução* estão preenchidos.  
+   Utiliza `Trim()` para garantir que campos com apenas espaços sejam tratados como vazios.
+
+2. **Busca do processo**  
+   Percorre a aba *Registros* a partir da linha 8, localizando o processo que:
+   - Coincide com o número informado na aba *Devolução*
+   - Ainda **não possui data de entrega** preenchida
+
+3. **Validação do processo**  
+   Caso o processo não seja encontrado ou já possua data de entrega preenchida, exibe uma mensagem de erro e encerra a execução.
+
+4. **Transferência de dados**  
+   Copia os dados da aba *Devolução* para a **linha exata** onde o processo foi encontrado na aba *Registros*, utilizando **nomes de intervalo**.
+
+5. **Confirmação ao usuário**  
+   Exibe uma mensagem indicando que a devolução foi registrada com sucesso.
+
+---
+
 ## 📌 Observações
 
-- A macro **não depende dos cabeçalhos** da linha 6, pois utiliza nomes de intervalo.
-- Continua funcionando mesmo com **alterações na ordem ou inclusão de colunas**.
-- Implementa uma abordagem **robusta e profissional** para automação de registros no Excel.
+- As macros **não dependem dos cabeçalhos** da linha 6, pois utilizam nomes de intervalo.
+- Continuam funcionando mesmo com **alterações na ordem ou inclusão de colunas**.
+- Implementam uma abordagem **robusta e profissional** para automação de registros no Excel.
+- O `Trim()` aplicado em `RegistrarDevolucao` evita falhas por **espaços acidentais** no início ou fim dos valores comparados e gravados.
 
 ---
 
 ## 🚀 Objetivo
 
 Facilitar o controle, padronizar registros e otimizar a distribuição de cálculos dentro da unidade.
-
