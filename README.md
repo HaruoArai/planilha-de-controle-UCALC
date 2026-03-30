@@ -72,3 +72,9 @@ A macro executa as seguintes etapas:
 ## 🚀 Objetivo
 
 Facilitar o controle, padronizar registros e otimizar a distribuição de cálculos dentro da unidade.
+
+---
+
+## 🎨 Créditos
+
+Os ícones utilizados foram obtidos em: [Icons8](https://icons8.com.br/icons/set/relat%C3%B3rio--size-small--white)
