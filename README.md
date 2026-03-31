@@ -16,18 +16,21 @@ A macro executa as seguintes etapas:
    Verifica se todos os campos obrigatórios da aba *Distribuição* estão preenchidos.
 
 2. **Localização da próxima linha disponível**  
-   Identifica a primeira linha vazia na aba *Registros*, a partir da linha 8.
+   Identifica a primeira linha vazia na aba *Registros*, a partir da linha **7**.
 
 3. **Registro da data**  
-   Insere automaticamente a data do registro na coluna correspondente.
+   Insere automaticamente a data do registro na coluna correspondente, com formatação padrão `dd/mm/yyyy`.
 
 4. **Transferência de dados**  
    Copia os dados da aba *Distribuição* para a aba *Registros*, utilizando **nomes de intervalo**, garantindo maior robustez.
 
-5. **Limpeza dos campos (opcional)**  
-   Limpa os campos da aba *Distribuição*, mantendo apenas os campos **Modo** e **Calculista**.
+5. **Tratamento do campo Calculista**  
+   Armazena apenas o **primeiro nome** do calculista, utilizando `Trim()` e `Split()` para padronização.
 
-6. **Confirmação ao usuário**  
+6. **Limpeza dos campos (opcional)**  
+   Possui estrutura para limpeza dos campos da aba *Distribuição*, mantendo **Modo** e **Calculista** (atualmente desativada para testes).
+
+7. **Confirmação ao usuário**  
    Exibe uma mensagem indicando que o registro foi realizado com sucesso.
 
 ---
@@ -45,7 +48,7 @@ A macro executa as seguintes etapas:
    Utiliza `Trim()` para garantir que campos com apenas espaços sejam tratados como vazios.
 
 2. **Busca do processo**  
-   Percorre a aba *Registros* a partir da linha 8, localizando o processo que:
+   Percorre a aba *Registros* a partir da linha **7**, localizando o processo que:
    - Coincide com o número informado na aba *Devolução*
    - Ainda **não possui data de entrega** preenchida
 
@@ -53,19 +56,26 @@ A macro executa as seguintes etapas:
    Caso o processo não seja encontrado ou já possua data de entrega preenchida, exibe uma mensagem de erro e encerra a execução.
 
 4. **Transferência de dados**  
-   Copia os dados da aba *Devolução* para a **linha exata** onde o processo foi encontrado na aba *Registros*, utilizando **nomes de intervalo**.
+   Copia os dados da aba *Devolução* para a **mesma linha** onde o processo foi encontrado na aba *Registros*, utilizando **nomes de intervalo**.
 
-5. **Confirmação ao usuário**  
-   Exibe uma mensagem indicando que a devolução foi registrada com sucesso.
+5. **Registro direcionado**  
+   A atualização ocorre diretamente na linha do processo, evitando duplicidade de registros e garantindo consistência dos dados.
+
+6. **Confirmação ao usuário**  
+   Exibe uma mensagem indicando que a devolução foi registrada com sucesso, incluindo:
+   - Índice do processo  
+   - Nome do exequente  
 
 ---
 
 ## 📌 Observações
 
-- As macros **não dependem dos cabeçalhos** da linha 6, pois utilizam nomes de intervalo.
+- As macros **não dependem dos cabeçalhos fixos**, pois utilizam nomes de intervalo.
 - Continuam funcionando mesmo com **alterações na ordem ou inclusão de colunas**.
+- A busca por processos considera apenas registros **sem data de entrega**, evitando sobrescritas indevidas.
+- O uso de `Trim()` evita falhas por **espaços acidentais** nos dados.
+- O tratamento do campo **Calculista** padroniza a informação armazenada (primeiro nome).
 - Implementam uma abordagem **robusta e profissional** para automação de registros no Excel.
-- O `Trim()` aplicado em `RegistrarDevolucao` evita falhas por **espaços acidentais** no início ou fim dos valores comparados e gravados.
 
 ---
 
@@ -77,4 +87,5 @@ Facilitar o controle, padronizar registros e otimizar a distribuição de cálcu
 
 ## 🎨 Créditos
 
-Os ícones utilizados foram obtidos em: [Icons8](https://icons8.com.br/icons/set/relat%C3%B3rio--size-small--white)
+Os ícones utilizados foram obtidos em:  
+[Icons8](https://icons8.com.br/icons/set/relat%C3%B3rio--size-small--white)
