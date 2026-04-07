@@ -75,7 +75,7 @@ Sub RegistrarDevolucao()
     
     ' Realiza o registro da devolução na mesma linha onde o processo foi encontrado
     ' Os dados são copiados da aba Devolução para a aba Registros
-    wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Data_Entrega").Column).Value = Trim(wsDev.Range("Data_da_Entrega").Value)
+    wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Data_Entrega").Column).Value = CDate(wsDev.Range("Data_da_Entrega").Value) 'correção para data ser TIPO DATA
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("N_Arquivo").Column).Value = Trim(wsDev.Range("Arquivo_Calc_dev").Value)
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Valor_PGE").Column).Value = Trim(wsDev.Range("Valor_PGE_dev").Value)
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Valor_Registro").Column).Value = Trim(wsDev.Range("Valor_dev").Value)
