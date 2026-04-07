@@ -47,21 +47,28 @@ A macro executa as seguintes etapas:
    Verifica se todos os campos obrigatórios da aba *Devolução* estão preenchidos.  
    Utiliza `Trim()` para garantir que campos com apenas espaços sejam tratados como vazios.
 
-2. **Busca do processo**  
+2. **Validação de data**  
+   - Confirma se o valor informado em `Data_da_Entrega` é uma data válida.
+   - Bloqueia o registro caso o formato esteja incorreto.
+
+3. **Busca do processo**  
    Percorre a aba *Registros* a partir da linha **7**, localizando o processo que:
    - Coincide com o número informado na aba *Devolução*
    - Ainda **não possui data de entrega** preenchida
 
-3. **Validação do processo**  
+4. **Validação do processo**  
    Caso o processo não seja encontrado ou já possua data de entrega preenchida, exibe uma mensagem de erro e encerra a execução.
 
-4. **Transferência de dados**  
+5. **Transferência de dados**  
    Copia os dados da aba *Devolução* para a **mesma linha** onde o processo foi encontrado na aba *Registros*, utilizando **nomes de intervalo**.
 
-5. **Registro direcionado**  
+6. **Registro direcionado**  
    A atualização ocorre diretamente na linha do processo, evitando duplicidade de registros e garantindo consistência dos dados.
 
-6. **Confirmação ao usuário**  
+7. **Limpeza dos campos da aba Devolução**  
+   Todos os campos são limpos após registro bem-sucedido, garantindo que novos registros não sejam confundidos.
+
+8. **Confirmação ao usuário**  
    Exibe uma mensagem indicando que a devolução foi registrada com sucesso, incluindo:
    - Índice do processo  
    - Nome do exequente  

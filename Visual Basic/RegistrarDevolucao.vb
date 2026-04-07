@@ -34,6 +34,13 @@ Sub RegistrarDevolucao()
         Exit Sub
     End If
     
+    ' Valida se o conteúdo de Data_da_Entrega é de fato uma data válida
+    ' IsDate verifica se o valor pode ser interpretado como data pelo VBA
+    If Not IsDate(wsDev.Range("Data_da_Entrega").Value) Then
+        MsgBox "Data de entrega inválida. Por favor, informe uma data no formato dd/mm/aaaa.", vbExclamation, "Data inválida"
+        Exit Sub
+    End If
+    
     ' Obtém as colunas correspondentes aos campos Processo e Data_Entrega
     ' Utiliza nomes definidos para evitar uso de índices fixos
     colProcesso = wsRegistro.Range("Processo_Registro").Column
@@ -68,13 +75,21 @@ Sub RegistrarDevolucao()
     
     ' Realiza o registro da devolução na mesma linha onde o processo foi encontrado
     ' Os dados são copiados da aba Devolução para a aba Registros
-    
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Data_Entrega").Column).Value = Trim(wsDev.Range("Data_da_Entrega").Value)
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("N_Arquivo").Column).Value = Trim(wsDev.Range("Arquivo_Calc_dev").Value)
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Valor_PGE").Column).Value = Trim(wsDev.Range("Valor_PGE_dev").Value)
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Valor_Registro").Column).Value = Trim(wsDev.Range("Valor_dev").Value)
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Qtde_exeq").Column).Value = Trim(wsDev.Range("Qtde_e_dev").Value)
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Qtde_calc").Column).Value = Trim(wsDev.Range("Qtde_c_dev").Value)
+    
+    ' Limpa todos os campos da aba Devolução após o registro bem-sucedido
+    wsDev.Range("Data_da_Entrega").Value = ""
+    wsDev.Range("Arquivo_Calc_dev").Value = ""
+    wsDev.Range("Valor_PGE_dev").Value = ""
+    wsDev.Range("Valor_dev").Value = ""
+    wsDev.Range("Qtde_e_dev").Value = ""
+    wsDev.Range("Qtde_c_dev").Value = ""
+    wsDev.Range("Processo_dev").Value = ""
     
     ' Exibe mensagem de confirmação com informações adicionais do processo
     ' Inclui o Índice de Entrada e o nome do Exequente como retorno ao usuário
@@ -84,3 +99,4 @@ Sub RegistrarDevolucao()
            vbInformation, "Registro concluído"
 
 End Sub
+
