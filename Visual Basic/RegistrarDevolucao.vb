@@ -77,8 +77,14 @@ Sub RegistrarDevolucao()
     ' Os dados são copiados da aba Devolução para a aba Registros
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Data_Entrega").Column).Value = CDate(wsDev.Range("Data_da_Entrega").Value) 'correção para data ser TIPO DATA
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("N_Arquivo").Column).Value = Trim(wsDev.Range("Arquivo_Calc_dev").Value)
-    wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Valor_PGE").Column).Value = Trim(wsDev.Range("Valor_PGE_dev").Value)
-    wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Valor_Registro").Column).Value = Trim(wsDev.Range("Valor_dev").Value)
+    With wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Valor_PGE").Column)
+        .Value = wsDev.Range("Valor_PGE_dev").Value
+        .NumberFormat = "#,##0.00"
+    End With
+    With wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Valor_Registro").Column)
+        .Value = wsDev.Range("Valor_dev").Value
+        .NumberFormat = "#,##0.00"
+    End With
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Qtde_exeq").Column).Value = Trim(wsDev.Range("Qtde_e_dev").Value)
     wsRegistro.Cells(linhaProcesso, wsRegistro.Range("Qtde_calc").Column).Value = Trim(wsDev.Range("Qtde_c_dev").Value)
     
